@@ -13,7 +13,7 @@ class ProjectsTest extends TestCase
 
     /** @test */
 
-    public function only_authenticated_users_can_create_projects()
+    public function guests_cannot_create_projects()
     {
         //$this->withoutExceptionHandling();
 
@@ -23,6 +23,26 @@ class ProjectsTest extends TestCase
 
     }
 
+    /** @test */
+
+    public function guests_cannot_view_projects()
+    {
+        //$this->withoutExceptionHandling();
+
+        $this->get('/projects')->assertRedirect('login');        
+
+    }
+
+    /** @test */
+
+    public function guests_cannot_view_a_single_project()
+    {
+        //$this->withoutExceptionHandling();
+
+        $project = factory('App\Project')->create();
+        $this->get($project->path())->assertRedirect('login');        
+
+    }
     /** @test */
     
     public function a_user_can_create_a_project()
