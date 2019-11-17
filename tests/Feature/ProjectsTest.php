@@ -55,7 +55,6 @@ class ProjectsTest extends TestCase
         $attributes = [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph
-
         ];
 
         $this->post('/projects', $attributes)->assertRedirect('/projects');
