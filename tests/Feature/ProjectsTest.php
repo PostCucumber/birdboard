@@ -67,12 +67,13 @@ class ProjectsTest extends TestCase
 
     /** @test */
 
-    public function a_user_can_view_a_project()
+    public function a_user_can_view_their_project()
     {
+        $this->be(factory('App\User')->create());
 
-        $this->withoutExceptionHandling();
+        //$this->withoutExceptionHandling();
 
-        $project = factory('App\Project')->create();
+        $project = factory('App\Project')->create(['owner_id' => auth()->id()]);
 
         $this->get($project->path())
             ->assertSee($project->title)

@@ -10,7 +10,6 @@
             </li>
         @empty
             <li>No projects yet.</li>
-        
         @endforelse
     </ul>    
 </body>
