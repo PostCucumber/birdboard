@@ -75,8 +75,8 @@ class ProjectsTest extends TestCase
         $project = factory('App\Project')->create(['owner_id' => auth()->id()]);
 
         $this->get($project->path())
-            ->assertSee($project->title)
-            ->assertSee($project->description);
+             ->assertSee($project->title)
+             ->assertSee($project->description);
     }
 
     /** @test */
