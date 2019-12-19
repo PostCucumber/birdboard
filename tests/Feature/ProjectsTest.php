@@ -27,10 +27,9 @@ class ProjectsTest extends TestCase
 
     public function guests_cannot_view_projects()
     {
-        //$this->withoutExceptionHandling();
-
+        
         $this->get('/projects')->assertRedirect('login');        
-
+        
     }
 
     /** @test */
