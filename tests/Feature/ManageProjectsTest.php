@@ -13,17 +13,18 @@ class ManageProjectsTest extends TestCase
 
     /** @test */
 
-    public function guests_cannot_create_projects()
+    public function guests_cannot_manage_projects()
     {
         //$this->withoutExceptionHandling();
 
         $project = factory('App\Project')->create();
         
-        $this->post('/projects', $project->toArray())->assertRedirect('login');        
 
         $this->get('/projects')->assertRedirect('login');        
-
+        
         $this->get($project->path())->assertRedirect('login');        
+        
+        $this->post('/projects', $project->toArray())->assertRedirect('login');        
     }
 
     /** @test */
