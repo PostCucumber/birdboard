@@ -33,7 +33,7 @@ class ManageProjectsTest extends TestCase
     
     {
 
-        //$this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
         $this->actingAs(factory('App\User')->create());
         $this->get('/projects/create')->assertStatus(200);
 
