@@ -15,7 +15,7 @@ class ManageProjectsTest extends TestCase
 
     public function guests_cannot_manage_projects()
     {
-        //$this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
 
         $project = factory('App\Project')->create();
         
@@ -55,7 +55,7 @@ class ManageProjectsTest extends TestCase
     {
         $this->be(factory('App\User')->create());
 
-        //$this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
 
         $project = factory('App\Project')->create(['owner_id' => auth()->id()]);
 
@@ -69,7 +69,7 @@ class ManageProjectsTest extends TestCase
     {
          $this->be(factory('App\User')->create());
 
-        //$this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
 
         $project = factory('App\Project')->create();
 
@@ -81,7 +81,7 @@ class ManageProjectsTest extends TestCase
 
     public function a_project_requires_a_title()
     {
-        //$this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
         $this->actingAs(factory('App\User')->create());
 
         $attributes = factory('App\Project')->raw(['title' => '']);

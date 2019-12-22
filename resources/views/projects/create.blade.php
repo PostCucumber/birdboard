@@ -2,7 +2,16 @@
 <html>
 <head></head>
 <body>
-    <h1>Title</h1>
-    <div>Something</div>
+    <h1>Create a Project</h1>
+    <form action="">
+        <div>
+            <label for="">Title</label>
+        </div>
+        <div>
+            <input type="text" name="title" placeholder="title">
+        </div>
+    </form>
+
+</form>
 </body>
 </html>
