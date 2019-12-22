@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class ProjectsController extends Controller
 {
-    //
 
     public function index()
     {
@@ -34,8 +33,4 @@ class ProjectsController extends Controller
         return redirect('/projects');
     }
 
-    public function create()
-    {
-        
-    }
 }
