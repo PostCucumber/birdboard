@@ -17,11 +17,12 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/projects', 'ProjectsController@index');
-    Route::get('/projects/{project}', 'ProjectsController@show');
     Route::get('/projects/create', 'ProjectsController@create');
     Route::post('/projects', 'ProjectsController@store');
     
     Route::get('/home', 'HomeController@index')->name('home');
 });
+
+Route::get('/projects/{project}', 'ProjectsController@show')->middleware(); //Why can't this be inside the middleware group?
 
 Auth::routes();
