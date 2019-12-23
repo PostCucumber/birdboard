@@ -4,12 +4,14 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+
 use Tests\TestCase;
 
 class ManageProjectsTest extends TestCase
 {
 
-    use WithFaker, RefreshDatabase;
+    use WithFaker, RefreshDatabase, WithoutMiddleware;
 
     /** @test */
 
@@ -22,6 +24,8 @@ class ManageProjectsTest extends TestCase
 
         $this->get('/projects')->assertRedirect('login');        
         
+        $this->get('/projects/create')->assertRedirect('login');        
+        
         $this->get($project->path())->assertRedirect('login');        
         
         $this->post('/projects', $project->toArray())->assertRedirect('login');        
@@ -33,7 +37,7 @@ class ManageProjectsTest extends TestCase
     
     {
 
-        $this->withoutExceptionHandling();
+        // $this->withoutExceptionHandling();
         $this->actingAs(factory('App\User')->create());
         $this->get('/projects/create')->assertStatus(200);
 
@@ -67,9 +71,9 @@ class ManageProjectsTest extends TestCase
     /** @test */
     public function an_authenticated_user_cannot_view_the_projects_of_others()
     {
-         $this->be(factory('App\User')->create());
+        $this->be(factory('App\User')->create());
 
-        $this->withoutExceptionHandling();
+        // $this->withoutExceptionHandling();
 
         $project = factory('App\Project')->create();
 
@@ -81,7 +85,7 @@ class ManageProjectsTest extends TestCase
 
     public function a_project_requires_a_title()
     {
-        $this->withoutExceptionHandling();
+        // $this->withoutExceptionHandling();
         $this->actingAs(factory('App\User')->create());
 
         $attributes = factory('App\Project')->raw(['title' => '']);
@@ -94,6 +98,7 @@ class ManageProjectsTest extends TestCase
 
     public function a_project_requires_a_description()
     {
+        // $this->withoutExceptionHandling();
         $this->actingAs(factory('App\User')->create());
         $attributes = factory('App\Project')->raw(['description' => '']);
         
