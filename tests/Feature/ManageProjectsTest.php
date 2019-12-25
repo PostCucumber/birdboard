@@ -11,7 +11,7 @@ use Tests\TestCase;
 class ManageProjectsTest extends TestCase
 {
 
-    use WithFaker, RefreshDatabase, WithoutMiddleware;
+    use WithFaker, RefreshDatabase;
 
     /** @test */
 
