@@ -17,12 +17,11 @@ class ManageProjectsTest extends TestCase
 
     public function guests_cannot_manage_projects()
     {
-        // $this->WithoutMiddleware();
-        // $this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
 
         $project = factory('App\Project')->create();
         
-        //$this->get('/projects')->assertRedirect('/login'); //view        
+        $this->get('/projects')->assertRedirect('/login'); //view        
         
         $this->get('/projects/create')->assertRedirect('/login'); //create        
         
@@ -31,13 +30,16 @@ class ManageProjectsTest extends TestCase
         $this->post('/projects', $project->toArray())->assertRedirect('/login');        
     }
 
-    /** @test */ 
+    /** @test  
 
     public function only_authenticated_users_can_view_projects()
     {
+        // $this->withoutMiddleware();
         $this->withoutExceptionHandling();
+
         $this->get('/projects')->assertRedirect('/login');
     }
+*/
 
     /** @test */
     
