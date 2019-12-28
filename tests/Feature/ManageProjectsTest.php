@@ -11,7 +11,7 @@ use Tests\TestCase;
 class ManageProjectsTest extends TestCase
 {
 
-    use WithFaker, RefreshDatabase/*, WithoutMiddleware*/;
+    use WithFaker, RefreshDatabase, WithoutMiddleware;
 
     /** @test */
 
@@ -22,7 +22,7 @@ class ManageProjectsTest extends TestCase
 
         $project = factory('App\Project')->create();
         
-        $this->get('/projects')->assertRedirect('/login'); //view        
+        //$this->get('/projects')->assertRedirect('/login'); //view        
         
         $this->get('/projects/create')->assertRedirect('/login'); //create        
         
@@ -31,13 +31,14 @@ class ManageProjectsTest extends TestCase
         $this->post('/projects', $project->toArray())->assertRedirect('/login');        
     }
 
-    /** @test 
+    /** @test */ 
 
     public function only_authenticated_users_can_view_projects()
     {
+        $this->withoutExceptionHandling();
         $this->get('/projects')->assertRedirect('/login');
     }
-*/
+
     /** @test */
     
     public function a_user_can_create_a_project()
@@ -67,10 +68,12 @@ class ManageProjectsTest extends TestCase
     {
         $this->be(factory('App\User')->create());
 
-        $this->withoutExceptionHandling();
+        //$this->withoutExceptionHandling();
 
         $project = factory('App\Project')->create(['owner_id' => auth()->id()]);
-
+        
+        //dd($project->title);
+        //dump($project->title);
         $this->get($project->path())
              ->assertSee($project->title)
              ->assertSee($project->description);
