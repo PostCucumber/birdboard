@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
+//use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 use Tests\TestCase;
 
@@ -21,11 +21,11 @@ class ManageProjectsTest extends TestCase
 
         $project = factory('App\Project')->create();
         
-        $this->get('/projects')->assertRedirect('/login');        
+        $this->get('/projects')->assertRedirect('/login'); //view        
         
-        $this->get('/projects/create')->assertRedirect('/login');        
+        $this->get('/projects/create')->assertRedirect('/login'); //create        
         
-        $this->get($project->path())->assertRedirect('/login');        
+        $this->get($project->path())->assertRedirect('/login'); //view specific        
         
         $this->post('/projects', $project->toArray())->assertRedirect('/login');        
     }
