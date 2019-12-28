@@ -17,8 +17,8 @@ class ManageProjectsTest extends TestCase
 
     public function guests_cannot_manage_projects()
     {
-        $this->WithoutMiddleware();
-        $this->withoutExceptionHandling();
+        // $this->WithoutMiddleware();
+        // $this->withoutExceptionHandling();
 
         $project = factory('App\Project')->create();
         
@@ -31,6 +31,13 @@ class ManageProjectsTest extends TestCase
         $this->post('/projects', $project->toArray())->assertRedirect('/login');        
     }
 
+    /** @test 
+
+    public function only_authenticated_users_can_view_projects()
+    {
+        $this->get('/projects')->assertRedirect('/login');
+    }
+*/
     /** @test */
     
     public function a_user_can_create_a_project()
