@@ -4,19 +4,20 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-//use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 use Tests\TestCase;
 
 class ManageProjectsTest extends TestCase
 {
 
-    use WithFaker, RefreshDatabase;
+    use WithFaker, RefreshDatabase/*, WithoutMiddleware*/;
 
     /** @test */
 
     public function guests_cannot_manage_projects()
     {
+        $this->WithoutMiddleware();
         $this->withoutExceptionHandling();
 
         $project = factory('App\Project')->create();
@@ -37,6 +38,7 @@ class ManageProjectsTest extends TestCase
     {
 
         // $this->withoutExceptionHandling();
+        $this->WithoutMiddleware();
         $this->actingAs(factory('App\User')->create());
         $this->get('/projects/create')->assertStatus(200);
 
@@ -84,6 +86,8 @@ class ManageProjectsTest extends TestCase
 
     public function a_project_requires_a_title()
     {
+
+        $this->WithoutMiddleware();
         // $this->withoutExceptionHandling();
         $this->actingAs(factory('App\User')->create());
 
@@ -97,6 +101,7 @@ class ManageProjectsTest extends TestCase
 
     public function a_project_requires_a_description()
     {
+        $this->WithoutMiddleware();
         // $this->withoutExceptionHandling();
         $this->actingAs(factory('App\User')->create());
         $attributes = factory('App\Project')->raw(['description' => '']);
