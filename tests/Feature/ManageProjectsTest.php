@@ -23,6 +23,8 @@ class ManageProjectsTest extends TestCase
         
         $this->get('/projects')->assertRedirect('/login'); //view        
         
+        // $this->get('/projects')->assertStatus(302); //redirect        
+        
         $this->get('/projects/create')->assertRedirect('/login'); //create        
         
         $this->get($project->path())->assertRedirect('/login'); //view specific        

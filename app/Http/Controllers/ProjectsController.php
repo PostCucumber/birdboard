@@ -12,9 +12,16 @@ class ProjectsController extends Controller
     {
         // dd(auth()->user());
         // dd(auth()->user()->projects);
-        $projects = auth()->user()->projects; //scope to current user's projects or ask to login
-
-        return view('projects.index', compact('projects'));
+        if ((auth()->user()) != NULL)
+        {
+            $projects = auth()->user()->projects; //scope to current user's projects or ask to login
+            return view('projects.index', compact('projects'));
+        }
+        else
+        {
+            redirect('/login');
+            return;
+        }
     }
 
     public function show(Project $project)
