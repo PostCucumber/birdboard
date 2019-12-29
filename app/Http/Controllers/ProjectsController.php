@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class ProjectsController extends Controller
 {
 
+
     public function index()
     {
         $user = auth()->user();
@@ -17,19 +18,25 @@ class ProjectsController extends Controller
         } 
         else {
             $error = 'User is a guest.';
-            dump($error);
+            return redirect('/login');
         }   
     }
 
     public function show(Project $project)
     {
-        if (auth()->user()->isNot($project->owner)) {
-            abort(403);
-        }  
-        return view('projects.show', compact('project'));
+        $user = auth()->user();
+        if ($user != null) {
+            if (auth()->user()->isNot($project->owner)) {
+                abort(403);
+            }
+            return view('projects.show', compact('project'));
+        }
+        else {
+            return redirect('/login');
+        }
     }
 
-    public function store()
+    public function store() //set user as null in test!!!!
     {
         auth()->user()->projects()->create(request()->validate([
             'title' => 'required',
@@ -41,6 +48,12 @@ class ProjectsController extends Controller
 
     public function create()
     {
-        return view('projects.create');
+        $user = auth()->user();
+        if ($user != null) {
+            return view('projects.create');
+        }
+        else {
+            return redirect('/login');
+        }
     }
 }
