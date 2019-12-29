@@ -10,18 +10,15 @@ class ProjectsController extends Controller
 
     public function index()
     {
-        // dd(auth()->user());
-        // dd(auth()->user()->projects);
-        if ((auth()->user()) != NULL)
-        {
+        $user = auth()->user();
+        if ($user != null) {
             $projects = auth()->user()->projects; //scope to current user's projects or ask to login
             return view('projects.index', compact('projects'));
-        }
-        else
-        {
-            redirect('/login');
-            return;
-        }
+        } 
+        else {
+            $error = 'User is a guest.';
+            dump($error);
+        }   
     }
 
     public function show(Project $project)
