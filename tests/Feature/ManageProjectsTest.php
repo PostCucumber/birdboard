@@ -27,17 +27,6 @@ class ManageProjectsTest extends TestCase
         $this->post('/projects', $project->toArray())->assertRedirect('login');        
     }
 
-    /** @test  
-
-    public function only_authenticated_users_can_view_projects()
-    {
-        // $this->withoutMiddleware();
-        $this->withoutExceptionHandling();
-
-        $this->get('/projects')->assertRedirect('/login');
-    }
-*/
-
     /** @test */
     
     public function a_user_can_create_a_project()
@@ -45,7 +34,7 @@ class ManageProjectsTest extends TestCase
     {
 
         // $this->withoutExceptionHandling();
-        $this->WithoutMiddleware();
+        // $this->WithoutMiddleware();
         $this->actingAs(factory('App\User')->create());
         $this->get('/projects/create')->assertStatus(200);
 
@@ -67,12 +56,13 @@ class ManageProjectsTest extends TestCase
     {
         $this->be(factory('App\User')->create());
 
-        //$this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
 
         $project = factory('App\Project')->create(['owner_id' => auth()->id()]);
         
         //dd($project->title);
-        //dump($project->title);
+        dump($project->title);
+        dump($project->path());
         $this->get($project->path())
              ->assertSee($project->title)
              ->assertSee($project->description);

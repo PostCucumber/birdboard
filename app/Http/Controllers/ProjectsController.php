@@ -12,11 +12,13 @@ class ProjectsController extends Controller
     public function index()
     {
         $user = auth()->user();
-        if ($user != null) {
+        if ($user != null)
+        {
             $projects = auth()->user()->projects; //scope to current user's projects or ask to login
             return view('projects.index', compact('projects'));
         } 
-        else {
+        else
+        {
             $error = 'User is a guest.';
             return redirect('/login');
         }   
@@ -25,34 +27,47 @@ class ProjectsController extends Controller
     public function show(Project $project)
     {
         $user = auth()->user();
-        if ($user != null) {
-            if (auth()->user()->isNot($project->owner)) {
+        if ($user != null)
+        {
+            if (auth()->user()->isNot($project->owner))
+            {
                 abort(403);
             }
             return view('projects.show', compact('project'));
         }
-        else {
+        else
+        {
             return redirect('/login');
         }
     }
 
-    public function store() //set user as null in test!!!!
+    public function store()
     {
-        auth()->user()->projects()->create(request()->validate([
-            'title' => 'required',
-            'description' => 'required',
-        ]));
-        
-        return redirect('/projects');
+        $user = auth()->user();
+        if ($user != null)
+        {
+            auth()->user()->projects()->create(request()->validate([
+                'title' => 'required',
+                'description' => 'required',
+            ]));
+            
+            return redirect('/projects');
+        }
+        else
+        {
+            return redirect('/login');
+        }
     }
 
     public function create()
     {
         $user = auth()->user();
-        if ($user != null) {
+        if ($user != null)
+        {
             return view('projects.create');
         }
-        else {
+        else
+        {
             return redirect('/login');
         }
     }

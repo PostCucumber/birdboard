@@ -10,4 +10,10 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    
+    /*if ((auth()->user()) == null)
+    {
+        return redirect('/login');
+    }
+    */
 }
