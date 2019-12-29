@@ -27,16 +27,14 @@ class ProjectsController extends Controller
     public function show(Project $project)
     {
         $user = auth()->user();
-        if ($user != null)
-        {
+        if ($user != null) {
             if (auth()->user()->isNot($project->owner))
             {
                 abort(403);
             }
             return view('projects.show', compact('project'));
         }
-        else
-        {
+        else {
             return redirect('/login');
         }
     }

@@ -11,18 +11,19 @@ use Tests\TestCase;
 class ManageProjectsTest extends TestCase
 {
 
-    use WithFaker, RefreshDatabase, WithoutMiddleware;
+    use WithFaker, RefreshDatabase;
 
     /** @test */
 
     public function guests_cannot_manage_projects()
     {
         $this->withoutExceptionHandling();
+        $this->WithoutMiddleware();
+        
         $project = factory('App\Project')->create();
-        //dd($project);
         
         $this->get('/projects')->assertRedirect('login'); //view        
-        $this->get('/projects/create')->assertRedirect('login'); //create        
+        $this->get('/projects/create')->assertRedirect('login'); //create     
         $this->get($project->path())->assertRedirect('login'); //view specific        
         $this->post('/projects', $project->toArray())->assertRedirect('login');        
     }
@@ -33,8 +34,8 @@ class ManageProjectsTest extends TestCase
     
     {
 
-        // $this->withoutExceptionHandling();
-        // $this->WithoutMiddleware();
+        $this->withoutExceptionHandling();
+        $this->WithoutMiddleware();
         $this->actingAs(factory('App\User')->create());
         $this->get('/projects/create')->assertStatus(200);
 
@@ -56,13 +57,15 @@ class ManageProjectsTest extends TestCase
     {
         $this->be(factory('App\User')->create());
 
-        $this->withoutExceptionHandling();
+        //$this->withoutExceptionHandling();
+        //$this->WithoutMiddleware();
 
         $project = factory('App\Project')->create(['owner_id' => auth()->id()]);
         
         //dd($project->title);
-        dump($project->title);
-        dump($project->path());
+        dump("Title: " . $project->title);
+        dump("Path: "  . $project->path());
+    
         $this->get($project->path())
              ->assertSee($project->title)
              ->assertSee($project->description);
@@ -108,5 +111,4 @@ class ManageProjectsTest extends TestCase
         $this->post('/projects', $attributes)->assertSessionHasErrors('description');        
 
     }
-
 }
