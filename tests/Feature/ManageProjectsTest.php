@@ -62,10 +62,6 @@ class ManageProjectsTest extends TestCase
 
         $project = factory('App\Project')->create(['owner_id' => auth()->id()]);
         
-        //dd($project->title);
-        //dump("Title: " . $project->title); these cause the following error: Illuminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist.
-        //dump("Path: "  . $project->path());
-    
         $this->get($project->path())
              ->assertSee($project->title)
              ->assertSee($project->description);
