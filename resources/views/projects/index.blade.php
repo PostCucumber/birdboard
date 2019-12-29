@@ -1,7 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head></head>
-<body>
+@extends ('layouts.app')
+@section('content')
     <h1>Birdboard</h1>
     <ul>
         @forelse ($projects as $project)
@@ -12,5 +10,4 @@
             <li>No projects yet.</li>
         @endforelse
     </ul>    
-</body>
-</html>
+@endsection
