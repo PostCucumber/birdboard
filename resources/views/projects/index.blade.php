@@ -6,7 +6,7 @@
     </div>
     <div class="flex">
         @forelse ($projects as $project)
-                <div class="bg-white mr-4 p-8 shadow-md rounded">
+                <div class="bg-white mr-4 p-8 shadow-md rounded w-1/3">
                     <h3>{{ $project->title }}</h3>
                     <div>{{ $project->description }}</div>
                 </div>
