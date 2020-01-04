@@ -7,7 +7,7 @@
     <div class="flex">
         @forelse ($projects as $project)
                 <div class="bg-white mr-4 p-8 shadow-md rounded w-1/3">
-                    <h3>{{ $project->title }}</h3>
+                    <h1>{{ $project->title }}</h1>
                     <div>{{ $project->description }}</div>
                 </div>
         @empty
