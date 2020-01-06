@@ -36,6 +36,14 @@
  * @import "components/forms";
  */
 
+ .button {
+     @apply .py-2 .px-3 .bg-blue-brand .text-gray-100 .rounded .shadow .mb-2 .tracking-wide .font-light;
+ }
+
+ .card {
+     @apply .bg-white .p-5 .shadow-md .rounded-lg
+ }
+
 /**
  * This injects all of Tailwind's utility classes, generated based on your
  * config file.
