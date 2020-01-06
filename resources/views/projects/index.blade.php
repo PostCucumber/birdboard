@@ -2,7 +2,7 @@
 @section('content')
     <div class="flex items-center justify-between mb-3">       
         <h2 class="subpixel-antialiased text-gray-500">My Projects</h2>
-        <button class="py-2 px-3 bg-blue-400 text-gray-100 rounded shadow mb-2 tracking-wide font-light"><a href="/projects/create">Add Project</a></button>
+        <button class="py-2 px-3 bg-blue-brand text-gray-100 rounded shadow mb-2 tracking-wide font-light"><a href="/projects/create">Add Project</a></button>
     </div>
     <main class="flex flex-wrap -mx-3">
         @forelse ($projects as $project)
