@@ -15,6 +15,14 @@ class ProjectsTasksTest extends TestCase
     public function a_project_can_have_tasks()
     {
         $this->withoutExceptionHandling();
-        $this->actingAs(factory('App\User')->create());
+        $this->withoutMiddleware(); //avoid CSRF token mismatch in testing
+
+        $this->signIn();
+        $project = factory('App\Project')->create(['owner_id' => auth()->id()]);
+
+        $this->post($project->path() . '/tasks', ['body' => 'Lorem Ipsum.']);
+
+        $this->get($project->path())
+             ->assertSee('Lorem Ipsum.');
     }
 }

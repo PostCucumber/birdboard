@@ -58,14 +58,14 @@ class ProjectsController extends Controller
 
     public function create()
     {
-        $user = auth()->user();
-        if ($user != null)
-        {
+        // $user = auth()->user();
+        // if ($user != null)
+        // {
             return view('projects.create');
-        }
-        else
-        {
-            return redirect('/login');
-        }
+        // }
+        // else
+        // {
+        //     return redirect('/login');
+        // }
     }
 }
